@@ -51,7 +51,6 @@ public class MainActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		but = (Button) findViewById(R.id.button1);
 		but.setOnClickListener(this);
         sb=(SeekBar)findViewById(R.id.seekBar01);
