@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 import com.wandou.voicetoword.InstructionsAnalyze;
 import com.wandou.voicetoword.senddata;
+import com.wandou.voicetoword.*;
+
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerListener;
@@ -43,6 +45,7 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 	private Toast mToast;
 	public int times;
 	private int ID;
+	public senddata data;
 	private int progressnow;
 	
 	// 语音听写对象
@@ -60,7 +63,8 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initLayout();
-		
+
+        data.sent(999);
 		SpeechUtility.createUtility(this, SpeechConstant.APPID +"=55b71019");   
 		
 		// 初始化识别无UI识别对象
@@ -233,10 +237,11 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 		 if (times==0)
 	      {
 		     ID = InstructionsAnalyze.InstructionsAnalyze(text);
-	      
-	      Toast.makeText(MainActivity.this, String.format("ID = %d", ID),
-	              Toast.LENGTH_SHORT).show();
-	      Log.e("Reutrn ID", String.valueOf(ID));
+		     Toast.makeText(MainActivity.this, String.format("ID = %d", ID),
+	                  Toast.LENGTH_SHORT).show();
+	          Log.e("Reutrn ID", String.valueOf(ID));
+		     if (ID!=0)
+		     {
 	      // ID=Msb.getProgress();
 	      // sb.setProgress(0);
 	      // SBEditor.putInt("ID", ID);
@@ -263,6 +268,12 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 	       default:
 	           mSeekBar.setProgress(ID);
 	      }
+		     }
+		     else
+		     {
+		         // flytek AI resoponse here
+		         Toast.makeText(MainActivity.this, text,Toast.LENGTH_SHORT).show();
+		     }
 	      times++;
 	      }
 	}
@@ -341,6 +352,7 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 			boolean fromUser) {
 		// TODO Auto-generated method stub
 		seekBarProgress = progress;
+        new senddata().sent(progress);
 	}
 
 	@Override
