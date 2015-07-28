@@ -16,7 +16,7 @@ public class InstructionsAnalyze {
         ArrayList<Integer> Indexs=new ArrayList<Integer>();
         ArrayList<Integer> sorts=new ArrayList<Integer>();
         
-            String[]  Str={"后悔","开灯","关灯","增加","无悔"};
+            String[]  Str={"后悔","开灯","关灯","增加","减少"};
             for(i=0;i<5;i++)
             {
                if (listened.indexOf(Str[i])!=-1)

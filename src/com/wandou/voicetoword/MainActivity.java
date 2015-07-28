@@ -97,6 +97,7 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 		mIatResults.clear();
 		// …Ë÷√≤Œ ˝
 	    setParam();
+	    times=0;
 	    boolean isShowDialog = mSharedPreferences.getBoolean(
 				getString(R.string.pref_key_iat_show), true);
 		if (isShowDialog) {
@@ -229,7 +230,10 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 		mResultText.setSelection(mResultText.length());
 		
 		 text=resultText;
-	      ID = InstructionsAnalyze.InstructionsAnalyze(text);
+		 if (times==0)
+	      {
+		     ID = InstructionsAnalyze.InstructionsAnalyze(text);
+	      
 	      Toast.makeText(MainActivity.this, String.format("ID = %d", ID),
 	              Toast.LENGTH_SHORT).show();
 	      Log.e("Reutrn ID", String.valueOf(ID));
@@ -258,6 +262,8 @@ public class MainActivity extends  Activity implements OnClickListener, OnSeekBa
 	          break;
 	       default:
 	           mSeekBar.setProgress(ID);
+	      }
+	      times++;
 	      }
 	}
 		
